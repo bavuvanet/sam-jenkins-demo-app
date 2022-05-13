@@ -38,10 +38,12 @@ pipeline {
         S3_BUCKET = 'sam-jenkins-demo-us-east-1-bavv'
       }
       steps {
+        input 'Does Develop look OK?'
+        mileston(1)
         withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'us-east-1') {
-          unstash 'venv'
-          unstash 'aws-sam'
-          sh 'venv/bin/sam deploy --stack-name $STACK_NAME -t template.yaml --s3-bucket $S3_BUCKET --capabilities CAPABILITY_IAM'
+        unstash 'venv'
+        unstash 'aws-sam'
+        sh 'venv/bin/sam deploy --stack-name $STACK_NAME -t template.yaml --s3-bucket $S3_BUCKET --capabilities CAPABILITY_IAM'
         }
       }
     }
