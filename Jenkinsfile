@@ -39,7 +39,7 @@ pipeline {
       }
       steps {
         input 'Does Develop look OK?'
-        mileston(1)
+        milestone(1)
         withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'us-east-1') {
         unstash 'venv'
         unstash 'aws-sam'
